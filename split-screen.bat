@@ -1,0 +1,1 @@
+mvn package exec:java -Dexec.mainClass="org.icpclive.backend.SplitScreen"

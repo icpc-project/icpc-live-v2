@@ -1,0 +1,18 @@
+/*
+   CSS styling examples for the Vaadin app.
+   Visit https://vaadin.com/docs/flow/theme/theming-overview.html and
+   https://vaadin.com/themes/lumo for more information.
+*/
+
+vaadin-radio-button {
+    width: 18em;
+}
+
+
+vaadin-checkbox {
+    width: 18em;
+}
+
+
+
+
