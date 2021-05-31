@@ -44,7 +44,7 @@ public class PersonController extends DemonstratorController<Person> {
 
     @Override
     protected String getStatus(final int id) {
-        String[] statusState = MainScreenService.getInstance().getPersonData().labelStatus(id).split(System.lineSeparator());
+        String[] statusState = MainScreenService.getInstance().getPersonData().labelStatus(id).split("\n");
         return "true".equals(statusState[1]) ? "Show " + statusState[2] : "Nothing is shown";
     }
 
