@@ -23,8 +23,8 @@ public class Utils {
 
     public static String getTeamStatus(String status) {
         String[] splitStatus = status.split("\0");
-        String[] current = splitStatus[0].split(System.lineSeparator());
-        String[] last = splitStatus[1].split(System.lineSeparator());
+        String[] current = splitStatus[0].split("\n");
+        String[] last = splitStatus[1].split("\n");
         if ("true".equals(current[1])) {
             boolean hasThisType = TeamView.STATISTICS_SHOW_TYPE.equals(current[2]);
             for (String type : TeamUrls.types) {
