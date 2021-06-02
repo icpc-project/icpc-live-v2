@@ -3,7 +3,6 @@ package org.icpclive.webadmin.mainscreen.news;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
-import com.vaadin.flow.component.notification.Notification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.icpclive.backend.player.widgets.old.ClockWidget;

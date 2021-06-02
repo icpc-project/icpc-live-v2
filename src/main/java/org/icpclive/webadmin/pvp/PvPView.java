@@ -1,33 +1,21 @@
 package org.icpclive.webadmin.pvp;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.charts.model.PlotOptionsGauge;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.component.textfield.TextField;
-import org.icpclive.backend.player.urls.TeamUrls;
 import org.icpclive.datapassing.PvPData;
-import org.icpclive.datapassing.TeamData;
 import org.icpclive.events.TeamInfo;
 import org.icpclive.webadmin.mainscreen.MainScreenService;
 import org.icpclive.webadmin.mainscreen.properties.TeamProperties;
 import org.icpclive.webadmin.utils.RefreshableContent;
 import org.icpclive.webadmin.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@CssImport("./styles/shared-styles.css")
 public class PvPView extends VerticalLayout implements RefreshableContent<VerticalLayout> {
     private final PvPData data;
     private final Label status;
@@ -96,6 +84,7 @@ public class PvPView extends VerticalLayout implements RefreshableContent<Vertic
             firstTeam.setText(data.getTeam(0));
             secondTeam.setText(data.getTeam(1));
         });
+        teamSelection.getChildren().forEach(item -> item.getElement().getStyle().set("width", Utils.TEAM_FIELD_WIDTH));
         return teamSelection;
     }
 

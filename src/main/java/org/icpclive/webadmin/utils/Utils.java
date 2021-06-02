@@ -1,6 +1,5 @@
 package org.icpclive.webadmin.utils;
 
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.renderer.TextRenderer;
 import org.icpclive.backend.player.urls.TeamUrls;
 import org.icpclive.datapassing.TeamStatsData;
@@ -11,6 +10,9 @@ import org.icpclive.webadmin.mainscreen.team.TeamView;
 import java.util.Set;
 
 public class Utils {
+    public static String TEAM_FIELD_WIDTH = "18rem";
+
+
     public static TextRenderer<TeamInfo> newTeamTextRenderer() {
         Set<String> topTeamsIds = MainScreenService.getProperties().getTeamProperties().getTopTeamsId();
         return new TextRenderer<>(teamInfo -> {
@@ -34,7 +36,7 @@ public class Utils {
                 return "Type " + current[2] + " does not exist";
             }
             long currentTime = System.currentTimeMillis() - Long.parseLong(current[0]);
-            long sleepTime = MainScreenService.getInstance().getProperties().getTeamProperties().getSleepTime();
+            long sleepTime = MainScreenService.getProperties().getTeamProperties().getSleepTime();
             if (currentTime > sleepTime) {
                 return "Now showing " + current[2] + " of team " + current[3] +
                         " for " + (currentTime - sleepTime) / 1000 + " seconds";

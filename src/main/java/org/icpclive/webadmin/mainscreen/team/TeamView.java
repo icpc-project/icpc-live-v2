@@ -2,7 +2,6 @@ package org.icpclive.webadmin.mainscreen.team;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
@@ -20,7 +19,6 @@ import org.icpclive.webadmin.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-@CssImport("./styles/shared-styles.css")
 public class TeamView extends VerticalLayout implements RefreshableContent<VerticalLayout> {
     public static final String STATISTICS_SHOW_TYPE = "stats";
     private final TeamData data;
@@ -68,6 +66,10 @@ public class TeamView extends VerticalLayout implements RefreshableContent<Verti
 
         add(sleepTime);
         setHorizontalComponentAlignment(Alignment.CENTER, sleepTime);
+
+        add(typeSelection);
+        setHorizontalComponentAlignment(Alignment.CENTER, typeSelection);
+
 
         FormLayout controller = new FormLayout(showButton, hideButton, automatedNumber, automatedShowButton);
         controller.setWidth("50%");
@@ -118,30 +120,33 @@ public class TeamView extends VerticalLayout implements RefreshableContent<Verti
         teamSelection.setItems(properties.getTeamInfos());
         teamSelection.setRenderer(Utils.newTeamTextRenderer());
         teamSelection.setValue(properties.getTeamInfos()[0]);
-        teamSelection.addValueChangeListener(event -> showTeam(false));
+        teamSelection.addValueChangeListener(event -> {
+            if (data.isVisible()) {
+                showTeam(false);
+            }
+        });
+        teamSelection.getChildren().forEach(item -> item.getElement().getStyle().set("width", Utils.TEAM_FIELD_WIDTH));
         return teamSelection;
     }
 
     private void showTeam(boolean withStats) {
-        if (data.isVisible()) {
-            if (data.inAutomaticShow()) {
-                Notification.show("You need to stop automatic show first");
-                return;
-            }
-            String selectedType = typeSelection.getValue();
-            if (localLoad(selectedType)) {
-                data.setSleepTime(0);
-            } else {
-                setSleepTime();
-            }
-            String type = STATISTICS_SHOW_TYPE.equals(selectedType) ? "" : selectedType;
-            String outcome = data.setInfoManual(true, type, teamSelection.getValue(), withStats);
-            if (outcome != null) {
-                teamSelection.setValue(data.getTeam());
-                Notification.show(outcome);
-            }
-
+        if (data.inAutomaticShow()) {
+            Notification.show("You need to stop automatic show first");
+            return;
         }
+        String selectedType = typeSelection.getValue();
+        if (localLoad(selectedType)) {
+            data.setSleepTime(0);
+        } else {
+            setSleepTime();
+        }
+        String type = STATISTICS_SHOW_TYPE.equals(selectedType) ? "" : selectedType;
+        String outcome = data.setInfoManual(true, type, teamSelection.getValue(), withStats);
+        if (outcome != null) {
+            teamSelection.setValue(data.getTeam());
+            Notification.show(outcome);
+        }
+
     }
 
     private void setSleepTime() {

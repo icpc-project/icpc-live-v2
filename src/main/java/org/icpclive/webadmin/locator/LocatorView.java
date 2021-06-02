@@ -2,23 +2,21 @@ package org.icpclive.webadmin.locator;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import org.icpclive.backend.player.widgets.locator.LocatorCamera;
-import org.icpclive.backend.player.widgets.locator.LocatorsData;
 import org.icpclive.datapassing.LocatorData;
 import org.icpclive.events.TeamInfo;
 import org.icpclive.webadmin.mainscreen.MainScreenService;
 import org.icpclive.webadmin.mainscreen.properties.TeamProperties;
 import org.icpclive.webadmin.utils.RefreshableContent;
+import org.icpclive.webadmin.utils.Utils;
 
 import java.util.Set;
 
-@CssImport("./styles/shared-styles.css")
 public class LocatorView extends VerticalLayout  implements RefreshableContent<VerticalLayout> {
     private final LocatorData data;
     private final Label status;
@@ -100,6 +98,7 @@ public class LocatorView extends VerticalLayout  implements RefreshableContent<V
             }
             teamSelectedStatus.setText(selectedTeams.substring(0, selectedTeams.length() - 2));
         });
+        teamSelection.getChildren().forEach(item -> item.getElement().getStyle().set("width", Utils.TEAM_FIELD_WIDTH));
         return teamSelection;
     }
 

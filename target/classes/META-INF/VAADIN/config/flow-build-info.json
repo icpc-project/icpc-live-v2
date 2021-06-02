@@ -1,9 +1,9 @@
 {
   "compatibilityMode": false,
   "productionMode": false,
-  "npmFolder": "/home/alexander/Projects/Java/icpc-live-v2",
-  "generatedFolder": "/home/alexander/Projects/Java/icpc-live-v2/target/frontend",
-  "frontendFolder": "/home/alexander/Projects/Java/icpc-live-v2/frontend",
+  "npmFolder": "/home/alexander/Projects/Java/tempp/icpc-live-v2",
+  "generatedFolder": "/home/alexander/Projects/Java/tempp/icpc-live-v2/target/frontend",
+  "frontendFolder": "/home/alexander/Projects/Java/tempp/icpc-live-v2/frontend",
   "pnpm.enable": false,
   "require.home.node": false
 }

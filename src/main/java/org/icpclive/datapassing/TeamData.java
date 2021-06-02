@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.icpclive.events.TeamInfo;
 import org.icpclive.webadmin.mainscreen.MainScreenService;
 import org.icpclive.events.EventsLoader;
+import org.icpclive.webadmin.mainscreen.team.TeamView;
 //import org.icpclive.webadmin.mainscreen.MainScreenTeamView;
 
 import java.lang.reflect.Type;
@@ -110,8 +111,8 @@ public class TeamData extends CachedData {
         withStats = stats;
 
         lastStatus = currentStatus;
-        //currentStatus = timestamp + "\n" + isVisible + "\n" +
-         //       (infoType.equals("") ? MainScreenTeamView.STATISTICS_SHOW_TYPE : infoType) + "\n" + currentTeam.getName();
+        currentStatus = timestamp + "\n" + isVisible + "\n" +
+                (infoType.equals("") ? TeamView.STATISTICS_SHOW_TYPE : infoType) + "\n" + currentTeam.getName();
 
         log.debug(teamInfo.getName() + " " + teamId + " " + type);
 
@@ -184,7 +185,7 @@ public class TeamData extends CachedData {
         }
         String result = "";
         for (int i = currentPosition; i < currentPosition + 3; i++) {
-            result += (i != currentPosition ? "<br>" : "") +
+            result += (i != currentPosition ? "" : "") +
                     (i < teamsToShow.length ? automaticStatuses[i - currentPosition] + teamsToShow[i].getName() : "");
         }
         return result;
