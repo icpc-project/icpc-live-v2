@@ -10,6 +10,7 @@ import org.icpclive.datapassing.StandingsData;
 import org.icpclive.events.ContestInfo;
 import org.icpclive.webadmin.mainscreen.MainScreenService;
 import org.icpclive.webadmin.utils.Refreshable;
+import org.icpclive.webadmin.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ public class Standings extends VerticalLayout implements Refreshable {
                Notification.show("Compact standings could not have region filter");
            }
         });
+        regions.getChildren().forEach(item -> item.getElement().getStyle().set("width", Utils.TEAM_FIELD_WIDTH));
 
         optimismLevel =  new RadioButtonGroup<>();
         optimismLevel.setItems(StandingsData.OptimismLevel.values());
