@@ -38,8 +38,8 @@ public class LocatorView extends VerticalLayout  implements RefreshableContent<V
         locatorSelection.addValueChangeListener(event -> {
             data.setCameraID(event.getValue().cameraID);
         });
-   //     locatorSelection.setItems(LocatorsData.locatorCameras);
-    //    locatorSelection.setValue(LocatorsData.locatorCameras.get(0));
+        locatorSelection.setItems(LocatorsData.locatorCameras);
+        locatorSelection.setValue(LocatorsData.locatorCameras.get(0));
 
         showButton = new Button("Show info");
         showButton.addClickListener(event -> {
