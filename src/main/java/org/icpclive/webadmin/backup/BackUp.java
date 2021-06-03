@@ -13,12 +13,14 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class BackUp<T> {
     private static final Logger log = LogManager.getLogger(BackUp.class);
+    private final String backupFileName;
     private final Path backupFile;
     private final List<T> data;
     private final Class<T> type;
@@ -30,7 +32,8 @@ public class BackUp<T> {
             .create();
 
     public BackUp(final String backupFileName, final Class<T> type) {
-        this.backupFile = Paths.get(backupFileName);
+        this.backupFileName = backupFileName;
+        this.backupFile = Paths.get("backup", backupFileName);
         this.data = Collections.synchronizedList(new ArrayList<>());
         this.type = type;
         reload();
@@ -60,7 +63,7 @@ public class BackUp<T> {
     }
 
     public void backup() {
-        Path tempFile = Paths.get(backupFile.toString() + ".tmp");
+        Path tempFile = Paths.get("tmp", backupFileName + ".tmp");
         try (BufferedWriter writer = Files.newBufferedWriter(tempFile)) {
             synchronized (data) {
                 for (T item : data) {
@@ -70,6 +73,11 @@ public class BackUp<T> {
             }
         } catch (IOException e) {
             log.error("Error while making backup", e);
+        }
+        try {
+            Files.move(tempFile, backupFile, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            log.error("Error during moving temp backup file to main backup file");
         }
     }
 
