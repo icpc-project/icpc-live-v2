@@ -8,6 +8,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import org.icpclive.backend.player.widgets.locator.LocatorCamera;
+import org.icpclive.backend.player.widgets.locator.LocatorsData;
 import org.icpclive.datapassing.LocatorData;
 import org.icpclive.events.TeamInfo;
 import org.icpclive.webadmin.mainscreen.MainScreenService;
